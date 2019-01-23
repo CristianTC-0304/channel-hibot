@@ -43,7 +43,6 @@ class MQConnection {
               reject(err);
             } else {
               this.connection = conn;
-              console.log('this', this.connection);
               this.declareResources(channel);
               resolve();
               console.log('channel bien');

@@ -33,7 +33,6 @@ export class MQConnection {
                                 reject(err)
                             } else {
                                 this.connection = conn 
-                                console.log('this', this.connection)
                                 this.declareResources(channel)
                                 resolve ()
                                 console.log('channel bien')
@@ -80,6 +79,27 @@ export class MQConnection {
         })
         /*.then(channel => channel.consume("channel-botpress-rabbit", {noAck: true}))
         .then(message => console.log('message', message.content.toString()))*/
+    }
+
+    sendMessageChannel(bp) {
+        console.log('this.message')
+        const botId = 'welcome-bot'
+        const payload = { type: 'visit', text: 'Hola eso es un ejemplo'}
+        const userId = 'AxfY8t3PS8XWyPzTdz3fi'
+        const conversationId = '61'
+        const event = bp.IO.Event({
+            botId,
+            channel: 'hibot',
+            direction: 'incoming',
+            payload,
+            target: userId,
+            threadId: conversationId,
+            type: payload.type
+        })
+
+        console.log('este es el event no se donde invoca hibot', event)
+        return bp.events.sendEvent(event)
+
     }
 }
 

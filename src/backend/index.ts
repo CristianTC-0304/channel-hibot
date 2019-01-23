@@ -15,6 +15,7 @@ const onServerStarted = async (bp: typeof sdk) => {
 
   await api(bp, db)
   await socket(bp, db)
+  await connRabHibot.sendMessageChannel(bp)
 
 }
 
